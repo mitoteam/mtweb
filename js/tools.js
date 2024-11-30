@@ -59,5 +59,38 @@ const MtTools = (function() {
 
       return icon_element;
     },
+
+    //#region AJAX helpers
+    /**
+    * Fetch URL (with GET request) and replace element's contents.
+    * @param element HTMLElement
+    * @param url string
+    */
+    SimpleGet: function (element, url, placeholder = null, success_callback = null) {
+      if (placeholder == null) {
+        placeholder = this.Icon('spinner', 'waiting', 'fa-pulse').outerHTML + ' Sending request...';
+      }
+
+      element.innerHTML = placeholder;
+
+      fetch(url)
+        .then(function (response) {
+          if (response.ok) {
+            return response.text(); //reads response as HTML-string and returns next promise
+          } else {
+            console.error(response);
+            return null;
+          }
+        })
+        .then(function (html) {
+          element.innerHTML = html;
+
+          if (typeof success_callback === 'function') {
+            success_callback();
+          }
+        })
+        .catch(error => console.error(error));
+    },
+    //#endregion
   };
 })();
