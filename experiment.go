@@ -17,28 +17,33 @@ func BuildExperimentHtml() string {
 		Attribute("data-mt-test", "some attribute").
 		//classes deduplication
 		Class("border").Class("m-3").Class("p-3").Class("border").
-		Content("some <escaped> text")
+		Text("some <escaped> text")
 
 	document.Body().Append(div)
 
 	document.Body().
 		Append(
 			dhtml.Div().Class("border").Class("t-3").Class("p-3").
-				Content("multi").
+				Text("multi").
 				Append(
-					dhtml.Span().Content("red").Classes([]string{"border", "border-danger", "border-5"}),
+					dhtml.Span().Text("red").Classes([]string{"border", "border-danger", "border-5"}),
 				).
-				Content("content"),
+				Text("content"),
 		).
 		Append(
 			dhtml.Div().Classes([]string{"border", "p-3", "m-3"}).
-				Content("content").
-				Content("only"),
+				Text("content").
+				Text("only"),
 		).
 		Append(
 			dhtml.Div().Classes([]string{"border", "p-3", "m-3"}).
-				Content("Icon test: ").
+				Text("Icon test: ").
 				Append(&Icon{Name: "face-awesome", Label: "test"}),
+		)
+
+	document.Body().
+		Append(
+			(&Card{Title: "Card title"}).Append(dhtml.Content("card content")),
 		)
 
 	return document.Render()
