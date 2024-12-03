@@ -13,6 +13,9 @@ type (
 	}
 )
 
+// force interface implementation
+var _ dhtml.ElementI = &Icon{}
+
 func (i *Icon) GetTags() dhtml.TagsList {
 	r := make(dhtml.TagsList, 0, 2) //place for label without additional memory allocation
 

@@ -4,22 +4,13 @@ import (
 	"github.com/mitoteam/dhtml"
 )
 
-func BuildExperimentHtml() *dhtml.Tag {
-	head := dhtml.NewTag("head").
-		Append(
-			dhtml.NewTag("link").
-				Attribute("href", "/assets/vendor/bootstrap.min.css").Attribute("rel", "stylesheet"),
-		).
-		Append(
-			dhtml.NewTag("link").
-				Attribute("href", "/assets/vendor/fontawesome.min.css").Attribute("rel", "stylesheet"),
-		).
-		Append(
-			dhtml.NewTag("link").
-				Attribute("href", "/assets/vendor/regular.min.css").Attribute("rel", "stylesheet"),
-		)
+func BuildExperimentHtml() string {
+	document := dhtml.NewDocument()
 
-	body := dhtml.NewTag("body")
+	document.
+		Stylesheet("/assets/vendor/bootstrap.min.css").
+		Stylesheet("/assets/vendor/fontawesome.min.css").
+		Stylesheet("/assets/vendor/regular.min.css")
 
 	div := dhtml.Div().
 		Id("test").
@@ -28,9 +19,9 @@ func BuildExperimentHtml() *dhtml.Tag {
 		Class("border").Class("m-3").Class("p-3").Class("border").
 		Content("some <escaped> text")
 
-	body.Append(div)
+	document.Body().Append(div)
 
-	body.
+	document.Body().
 		Append(
 			dhtml.Div().Class("border").Class("t-3").Class("p-3").
 				Content("multi").
@@ -50,10 +41,5 @@ func BuildExperimentHtml() *dhtml.Tag {
 				Append(&Icon{Name: "face-awesome", Label: "test"}),
 		)
 
-	html := dhtml.NewTag("html").
-		Comment("some <escaped> comment").
-		Append(head).
-		Append(body)
-
-	return html
+	return document.Render()
 }
