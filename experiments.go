@@ -52,5 +52,9 @@ func BuildExperimentHtml() string {
 			Body("card body"),
 	)
 
-	return document.Render()
+	return document.String()
+}
+
+func BuildExperimentForm() *dhtml.HtmlPiece {
+	return dhtml.Piece("Form body")
 }

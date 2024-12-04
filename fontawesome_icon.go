@@ -12,10 +12,10 @@ import (
 
 var (
 	fa_icon_classes = []string{
-		"fas", "far", "fal", "fad",
+		"far", "fas", "fal", "fad",
 	}
 
-	default_fa_class = "fas"
+	default_fa_class = "far"
 )
 
 func SetDefaultFAClass(class string) {
