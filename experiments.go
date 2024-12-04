@@ -55,6 +55,8 @@ func BuildExperimentHtml() string {
 	return document.String()
 }
 
-func BuildExperimentForm() *dhtml.HtmlPiece {
-	return dhtml.Piece("Form body")
+func BuildExperimentForm() *dhtml.FormElement {
+	form := dhtml.Form()
+
+	return form
 }
