@@ -43,7 +43,7 @@ func BuildExperimentHtml() string {
 
 	document.Body().
 		Append(
-			(&Card{Header: dhtml.Piece("Card title text")}).Append(dhtml.Text("card content")),
+			(&Card{Header: dhtml.Piece("Card title text ").Append(&Icon{Name: "car"})}).Append("card content"),
 		)
 
 	return document.Render()

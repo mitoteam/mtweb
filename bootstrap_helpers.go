@@ -7,26 +7,27 @@ import "github.com/mitoteam/dhtml"
 
 type (
 	Card struct {
-		Header *dhtml.ElementList
-		body   *dhtml.ElementList
+		Header *dhtml.HtmlPiece
+		body   *dhtml.HtmlPiece
 	}
 )
 
 // force interface implementation declaring fake variable
 var _ dhtml.ElementI = (*Card)(nil)
 
-func (c *Card) AppendList(list *dhtml.ElementList) *Card {
-	if c.body == nil {
-		c.body = dhtml.Piece(list)
-	} else {
-		c.body.AppendList(list)
-	}
-
+// Appends something to body
+func (c *Card) Append(v any) *Card {
+	c.Body().Append(v)
 	return c
 }
 
-func (c *Card) Append(element dhtml.ElementI) *Card {
-	return c.AppendList(dhtml.NewElementList().Append(element))
+// Pointer to elements body
+func (c *Card) Body() *dhtml.HtmlPiece {
+	if c.body == nil {
+		c.body = dhtml.NewHtmlPiece() //empty piece
+	}
+
+	return c.body
 }
 
 // region Rendering
@@ -39,7 +40,7 @@ func (c *Card) GetTags() dhtml.TagsList {
 
 	if c.body != nil {
 		root.Append(
-			dhtml.Div().Class("card-body").AppendList(c.body),
+			dhtml.Div().Class("card-body").Append(c.body),
 		)
 	}
 
