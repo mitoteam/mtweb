@@ -8,6 +8,7 @@ func BuildExperimentHtml() string {
 	document := dhtml.NewDocument()
 
 	document.
+		Title("The Experiment!").
 		Stylesheet("/assets/vendor/bootstrap.min.css").
 		Stylesheet("/assets/vendor/fontawesome.min.css").
 		Stylesheet("/assets/vendor/regular.min.css")
@@ -41,15 +42,15 @@ func BuildExperimentHtml() string {
 				Append(&Icon{Name: "face-awesome", Label: "test"}),
 		)
 
-	card := NewCard().
-		Header(
-			NewJustifiedLR().
-				L("Card title text").
-				R(&Icon{Name: "car"}),
-		).
-		Body("card body")
-
-	document.Body().Append(card)
+	document.Body().Append(
+		NewCard().
+			Header(
+				NewJustifiedLR().
+					L("Card title text").
+					R(&Icon{Name: "car"}),
+			).
+			Body("card body"),
+	)
 
 	return document.Render()
 }
