@@ -36,7 +36,7 @@ func (j *JustifiedLR) R(v any) *JustifiedLR {
 }
 
 func (j *JustifiedLR) GetTags() dhtml.TagsList {
-	return dhtml.Div().Classes([]string{"d-flex", "justify-content-between"}).
+	return dhtml.Div().Class([]string{"d-flex", "justify-content-between"}).
 		Append(dhtml.Div().Append(j.l)).
 		Append(dhtml.Div().Append(j.r)).
 		GetTags()

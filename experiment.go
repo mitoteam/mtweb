@@ -27,19 +27,19 @@ func BuildExperimentHtml() string {
 			dhtml.Div().Class("border").Class("t-3").Class("p-3").
 				Text("multi").
 				Append(
-					dhtml.Span().Text("red").Classes([]string{"border", "border-danger", "border-5"}),
+					dhtml.Span().Text("red").Class([]string{"border", "border-danger", "border-5"}),
 				).
 				Text("content"),
 		).
 		Append(
-			dhtml.Div().Classes([]string{"border", "p-3", "m-3"}).
+			dhtml.Div().Class("border p-3   m-3").
 				Text("content").
 				Text("only"),
 		).
 		Append(
-			dhtml.Div().Classes([]string{"border", "p-3", "m-3"}).
+			dhtml.Div().Class([]string{"border", "p-3", "m-3"}).
 				Text("Icon test: ").
-				Append(&Icon{Name: "face-awesome", Label: "test"}),
+				Append(Icon("face-awesome").Label("label test")),
 		)
 
 	document.Body().Append(
@@ -47,7 +47,7 @@ func BuildExperimentHtml() string {
 			Header(
 				NewJustifiedLR().
 					L("Card title text").
-					R(&Icon{Name: "car"}),
+					R(Icon("car").Title("car icon title")),
 			).
 			Body("card body"),
 	)
