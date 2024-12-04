@@ -2,49 +2,42 @@ package mtweb
 
 import "github.com/mitoteam/dhtml"
 
-//Some Bootstrap Css Framework helpers
-//https://getbootstrap.com/docs/5.3/getting-started/introduction/
-
+// couple of <div> tags justified by applying .d-flex and .justify-content-between classes
 type (
-	Card struct {
-		Header *dhtml.HtmlPiece
-		body   *dhtml.HtmlPiece
+	JustifiedLR struct {
+		l dhtml.HtmlPiece
+		r dhtml.HtmlPiece
 	}
 )
 
 // force interface implementation declaring fake variable
-var _ dhtml.ElementI = (*Card)(nil)
+var _ dhtml.ElementI = (*JustifiedLR)(nil)
 
-// Appends something to body
-func (c *Card) Append(v any) *Card {
-	c.Body().Append(v)
-	return c
+func NewJustifiedLR() *JustifiedLR {
+	return &JustifiedLR{}
 }
 
-// Pointer to elements body
-func (c *Card) Body() *dhtml.HtmlPiece {
-	if c.body == nil {
-		c.body = dhtml.NewHtmlPiece() //empty piece
-	}
-
-	return c.body
+func (j *JustifiedLR) GetL() *dhtml.HtmlPiece {
+	return &j.l
 }
 
-// region Rendering
-func (c *Card) GetTags() dhtml.TagsList {
-	root := dhtml.Div().Class("card")
-
-	if c.Header != nil {
-		root.Append(dhtml.Div().Class("card-header").Append(c.Header))
-	}
-
-	if c.body != nil {
-		root.Append(
-			dhtml.Div().Class("card-body").Append(c.body),
-		)
-	}
-
-	return dhtml.TagsList{root}
+func (j *JustifiedLR) L(v any) *JustifiedLR {
+	j.l.Append(v)
+	return j
 }
 
-//endregion
+func (j *JustifiedLR) GetR() *dhtml.HtmlPiece {
+	return &j.r
+}
+
+func (j *JustifiedLR) R(v any) *JustifiedLR {
+	j.r.Append(v)
+	return j
+}
+
+func (j *JustifiedLR) GetTags() dhtml.TagsList {
+	return dhtml.Div().Classes([]string{"d-flex", "justify-content-between"}).
+		Append(dhtml.Div().Append(j.l)).
+		Append(dhtml.Div().Append(j.r)).
+		GetTags()
+}

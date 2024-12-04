@@ -41,10 +41,15 @@ func BuildExperimentHtml() string {
 				Append(&Icon{Name: "face-awesome", Label: "test"}),
 		)
 
-	document.Body().
-		Append(
-			(&Card{Header: dhtml.Piece("Card title text ").Append(&Icon{Name: "car"})}).Append("card content"),
-		)
+	card := NewCard().
+		Header(
+			NewJustifiedLR().
+				L("Card title text").
+				R(&Icon{Name: "car"}),
+		).
+		Body("card body")
+
+	document.Body().Append(card)
 
 	return document.Render()
 }
