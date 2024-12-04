@@ -2,13 +2,12 @@ package mtweb
 
 import "github.com/mitoteam/dhtml"
 
-//Some Bootstrap Css Framework helpers
-//https://getbootstrap.com/docs/5.3/getting-started/introduction/
+//https://getbootstrap.com/docs/5.3/components/card/
 
 type (
 	Card struct {
-		header *dhtml.HtmlPiece
-		body   *dhtml.HtmlPiece
+		header dhtml.HtmlPiece
+		body   dhtml.HtmlPiece
 	}
 )
 
@@ -21,42 +20,34 @@ func NewCard() *Card {
 
 // Appends something to header
 func (c *Card) Header(v any) *Card {
-	c.GetHeader().Append(v)
+	c.header.Append(v)
 	return c
 }
 
 func (c *Card) GetHeader() *dhtml.HtmlPiece {
-	if c.header == nil {
-		c.header = dhtml.NewHtmlPiece() //empty piece
-	}
-
-	return c.header
+	return &c.header
 }
 
 // Appends something to body
 func (c *Card) Body(v any) *Card {
-	c.GetBody().Append(v)
+	c.body.Append(v)
 	return c
 }
 
 // Pointer to card's body
 func (c *Card) GetBody() *dhtml.HtmlPiece {
-	if c.body == nil {
-		c.body = dhtml.NewHtmlPiece() //empty piece
-	}
-
-	return c.body
+	return &c.body
 }
 
 // region Rendering
 func (c *Card) GetTags() dhtml.TagsList {
 	root := dhtml.Div().Class("card")
 
-	if c.header != nil {
+	if !c.header.IsEmpty() {
 		root.Append(dhtml.Div().Class("card-header").Append(c.header))
 	}
 
-	if c.body != nil {
+	if !c.body.IsEmpty() {
 		root.Append(
 			dhtml.Div().Class("card-body").Append(c.body),
 		)
