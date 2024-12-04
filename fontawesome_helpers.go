@@ -29,7 +29,7 @@ func (i *Icon) GetTags() dhtml.TagsList {
 	r = append(r, t)
 
 	if i.Label != "" {
-		r = append(r, dhtml.Content(i.Label))
+		r = append(r, dhtml.Text(i.Label))
 	}
 
 	return r
