@@ -56,7 +56,16 @@ func BuildExperimentHtml() string {
 }
 
 func BuildExperimentForm() *dhtml.FormElement {
-	form := dhtml.Form()
+	dhtml.FormManager.Register("test_form", &dhtml.FormHandler{
+		RenderF: func() *dhtml.FormElement {
+			input := dhtml.NewFormInput("text")
+			control := dhtml.NewFormControl("test_name").Label("test label").Element(input)
 
-	return form
+			return dhtml.NewForm().
+				Append(dhtml.Div().Text("test bdy").Class("border mb-3")).
+				Append(control)
+		},
+	})
+
+	return dhtml.FormManager.Render("test_form")
 }
