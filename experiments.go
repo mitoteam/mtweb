@@ -58,8 +58,6 @@ func BuildExperimentHtml() string {
 }
 
 func init() {
-	dhtml.SetDefaultSubmitButtonClasses("btn btn-secondary")
-
 	dhtml.FormManager.Register(&dhtml.FormHandler{
 		Id: "test_form",
 		RenderF: func(form *dhtml.FormElement, fd *dhtml.FormData) {
