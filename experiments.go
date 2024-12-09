@@ -57,24 +57,27 @@ func BuildExperimentHtml() string {
 	return document.String()
 }
 
+func init() {
+	dhtml.SetDefaultSubmitButtonClasses("btn btn-secondary")
+
+	dhtml.FormManager.Register("test_form", &dhtml.FormHandler{
+		RenderF: func() *dhtml.FormElement {
+			input := dhtml.NewFormInput("weha", "text").
+				Label("test label").Note("test note")
+
+			return dhtml.NewForm().
+				Append(dhtml.Div().Text("test bdy").Class("border mb-3")).
+				Append(input).
+				Append(dhtml.Div().Class("p-3 border").Append(
+					dhtml.NewFormInput("another", "date").Label("Date").Note("Another input").
+						DefaultValue(time.Now().Format(time.DateOnly)),
+				)).
+				Append(dhtml.NewFormSubmit())
+
+		},
+	})
+}
+
 func BuildExperimentForm() *dhtml.FormElement {
-	if !dhtml.FormManager.IsRegistered("test_form") {
-		dhtml.FormManager.Register("test_form", &dhtml.FormHandler{
-			RenderF: func() *dhtml.FormElement {
-				input := dhtml.NewFormInput("weha", "text").
-					Label("test label").Note("test note")
-
-				return dhtml.NewForm().
-					Append(dhtml.Div().Text("test bdy").Class("border mb-3")).
-					Append(input).
-					Append(dhtml.Div().Class("p-3 border").Append(
-						dhtml.NewFormInput("another", "date").Label("Date").Note("Another input").
-							DefaultValue(time.Now().Format(time.DateOnly)),
-					))
-
-			},
-		})
-	}
-
 	return dhtml.FormManager.Render("test_form")
 }
