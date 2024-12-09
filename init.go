@@ -12,7 +12,7 @@ func init() {
 
 		for name, itemErrors := range fd.GetErrors() {
 			if container.HasChildren() {
-				container.Append(dhtml.Div().Class("my-3 border"))
+				container.Append(dhtml.Div().Class("my-3 border border-2"))
 			}
 
 			for _, itemError := range itemErrors {
@@ -22,7 +22,7 @@ func init() {
 
 				if name != "" {
 					errorOut.Attribute("data-form-item-name", name).
-						Append(dhtml.Span().Class("fw-bold").Text(name)).
+						Append(dhtml.Span().Class("fw-bold").Append(fd.GetLabel(name))).
 						Append(":")
 				}
 
