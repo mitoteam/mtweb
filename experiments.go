@@ -59,25 +59,37 @@ func BuildExperimentHtml() string {
 
 func init() {
 	dhtml.SetDefaultSubmitButtonClasses("btn btn-secondary")
-
-	dhtml.FormManager.Register("test_form", &dhtml.FormHandler{
-		RenderF: func() *dhtml.FormElement {
-			input := dhtml.NewFormInput("weha", "text").
-				Label("test label").Note("test note")
-
-			return dhtml.NewForm().
-				Append(dhtml.Div().Text("test bdy").Class("border mb-3")).
-				Append(input).
-				Append(dhtml.Div().Class("p-3 border").Append(
-					dhtml.NewFormInput("another", "date").Label("Date").Note("Another input").
-						DefaultValue(time.Now().Format(time.DateOnly)),
-				)).
-				Append(dhtml.NewFormSubmit())
-
-		},
-	})
+	dhtml.FormManager.Register("test_form", GetTestForm())
 }
 
-func BuildExperimentForm() *dhtml.FormElement {
-	return dhtml.FormManager.Render("test_form")
+var testForm *dhtml.FormHandler
+
+func GetTestForm() *dhtml.FormHandler {
+	if testForm == nil {
+		testForm = &dhtml.FormHandler{
+			RenderF: func(form *dhtml.FormElement) {
+				form.
+					Append(
+						dhtml.NewFormInput("weha", "text").
+							Label("test label").Note("test note").DefaultValue("default v"),
+					).
+					Append(
+						dhtml.Div().Class("p-3 border").Append(
+							dhtml.NewFormInput("another", "date").
+								Label("Date").Note("Another input").DefaultValue(time.Now().Format(time.DateOnly)),
+						),
+					).
+					Append(dhtml.NewFormSubmit())
+			},
+			ValidateF: func(fd *dhtml.FormData) {
+				if v, ok := fd.GetValue("weha").(string); ok {
+					if len(v) < 3 {
+						fd.SetItemError("weha", "At least three characters expected")
+					}
+				}
+			},
+		}
+	}
+
+	return testForm
 }
