@@ -67,7 +67,7 @@ var testForm *dhtml.FormHandler
 func GetTestForm() *dhtml.FormHandler {
 	if testForm == nil {
 		testForm = &dhtml.FormHandler{
-			RenderF: func(form *dhtml.FormElement) {
+			RenderF: func(form *dhtml.FormElement, fd *dhtml.FormData) {
 				form.
 					Append(
 						dhtml.NewFormInput("weha", "text").
@@ -87,6 +87,9 @@ func GetTestForm() *dhtml.FormHandler {
 						fd.SetItemError("weha", "At least three characters expected")
 					}
 				}
+			},
+			SubmitF: func(fd *dhtml.FormData) {
+				fd.SetRedirect("/")
 			},
 		}
 	}
