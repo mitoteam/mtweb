@@ -7,7 +7,7 @@ import (
 )
 
 func BuildExperimentHtml() string {
-	document := dhtml.NewDocument()
+	document := dhtml.NewHtmlDocument()
 
 	document.
 		Title("The Experiment!").
@@ -61,7 +61,7 @@ func init() {
 	dhtml.FormManager.Register(&dhtml.FormHandler{
 		Id: "test_form",
 		RenderF: func(form *dhtml.FormElement, fd *dhtml.FormData) {
-			form.Append(dhtml.Dbg("Args: %v", fd.GetAllArgs()))
+			//form.Append(dhtml.Dbg("Args: %v", fd.GetAllArgs()))
 
 			form.
 				Append(
