@@ -2,11 +2,9 @@ package mtweb
 
 import "github.com/mitoteam/dhtml"
 
-type (
-	CardListElement struct {
-		cards []*CardElement
-	}
-)
+type CardListElement struct {
+	cards []*CardElement
+}
 
 // force interface implementation declaring fake variable
 var _ dhtml.ElementI = (*CardListElement)(nil)

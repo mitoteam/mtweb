@@ -3,12 +3,10 @@ package mtweb
 import "github.com/mitoteam/dhtml"
 
 // couple of <div> tags justified by applying .d-flex and .justify-content-between classes
-type (
-	JustifiedLR struct {
-		l dhtml.HtmlPiece
-		r dhtml.HtmlPiece
-	}
-)
+type JustifiedLR struct {
+	l dhtml.HtmlPiece
+	r dhtml.HtmlPiece
+}
 
 // force interface implementation declaring fake variable
 var _ dhtml.ElementI = (*JustifiedLR)(nil)
