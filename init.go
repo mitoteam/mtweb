@@ -8,27 +8,28 @@ func init() {
 	dhtml.SetDefaultSubmitButtonClasses("btn btn-secondary")
 
 	dhtml.FormManager.SetRenderErrorsF(func(fd *dhtml.FormData) (out dhtml.HtmlPiece) {
-		container := dhtml.Div().Class("border p-3 border-danger mb-3")
+		container := dhtml.Div().Class("border p-3 border-danger border-2 mb-3")
 
 		for name, itemErrors := range fd.GetErrors() {
-			if container.HasChildren() {
-				container.Append(dhtml.Div().Class("my-3 border border-2"))
-			}
-
 			for _, itemError := range itemErrors {
-				errorOut := dhtml.Div().Class("item-error")
+				errorDiv := dhtml.Div().Class("item-error")
 
-				errorOut.Append(Icon("circle-xmark").Class("text-danger").ElementClass("me-1"))
+				if container.HasChildren() {
+					//not first error, so add separating line
+					errorDiv.Class("border-top border-1 mt-1 pt-1")
+				}
+
+				errorDiv.Append(Icon("circle-xmark").Class("text-danger").ElementClass("me-1"))
 
 				if name != "" {
-					errorOut.Attribute("data-form-item-name", name).
+					errorDiv.Attribute("data-form-item-name", name).
 						Append(dhtml.Span().Class("fw-bold").Append(fd.GetLabel(name))).
 						Append(":")
 				}
 
-				errorOut.Append(itemError)
+				errorDiv.Append(itemError)
 
-				container.Append(errorOut)
+				container.Append(errorDiv)
 			}
 		}
 
