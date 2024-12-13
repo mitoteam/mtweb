@@ -12,7 +12,6 @@ var (
 	BtnSizeClasses = []string{
 		"btn-sm", "btn-md", "btn-lg",
 	}
-	DefaultBtnSizeClass = BtnSizeClasses[0]
 
 	BtnVariantClasses = []string{
 		"btn-outline-primary", "btn-outline-secondary", "btn-outline-success", "btn-outline-danger", "btn-outline-warning",
@@ -58,13 +57,13 @@ func (e *Btn) Class(v any) *Btn {
 func (e *Btn) GetTags() dhtml.TagsList {
 	e.tag.GetClasses().
 		Add("btn text-nowrap").
-		AddFromSet(DefaultBtnVariantClass, BtnVariantClasses).
-		AddFromSet(DefaultBtnSizeClass, BtnSizeClasses)
+		AddFromSet(DefaultBtnVariantClass, BtnVariantClasses)
 
 	return e.tag.GetTags()
 }
 
-// ==================
+// ======== Btn helpers ==========
+
 func NewEditBtn(href string) *Btn {
 	return NewBtn().Href(href).Title("Edit").Class("btn-sm px-1").
 		Label(Icon("edit"))
@@ -81,4 +80,8 @@ func NewDeleteBtn(href, confirmMessage string) *Btn {
 	btn.tag.AttributeUnsafe("onclick", "return confirm(\""+html.EscapeString(confirmMessage)+"\");")
 
 	return btn
+}
+
+func NewIconBtn(href, icon string, label any) *Btn {
+	return NewBtn().Href(href).Label(Icon(icon).Label(label))
 }
