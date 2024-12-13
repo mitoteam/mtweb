@@ -2,10 +2,6 @@ package mtweb
 
 import "github.com/mitoteam/dhtml"
 
-func RenderEmptyValue(label string) *dhtml.Tag {
-	return dhtml.Span().Class("text-muted").Append("[" + label + "]")
-}
-
 // =================== JustifiedLR =========================
 
 // couple of <div> tags justified by applying .d-flex and .justify-content-between classes

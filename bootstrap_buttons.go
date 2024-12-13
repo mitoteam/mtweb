@@ -120,7 +120,7 @@ func (e *BtnPanelElement) GetTags() dhtml.TagsList {
 	body := dhtml.NewHtmlPiece()
 
 	if len(e.buttons) == 0 {
-		body.Append(RenderEmptyValue("no buttons added"))
+		body.Append(dhtml.EmptyLabel("no buttons added"))
 	} else {
 		for _, btn := range e.buttons {
 			body.Append(btn)

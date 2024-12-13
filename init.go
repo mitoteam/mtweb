@@ -38,4 +38,12 @@ func init() {
 		out.Append(container)
 		return out
 	}
+
+	settings.EmptyLabelRendererF = func(label string, span *dhtml.Tag) {
+		if label == "" {
+			label = "empty"
+		}
+
+		span.Append("[" + label + "]").Class("text-muted")
+	}
 }
