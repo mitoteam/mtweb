@@ -2,38 +2,44 @@ package mtweb
 
 import "github.com/mitoteam/dhtml"
 
+func RenderEmptyValue(label string) *dhtml.Tag {
+	return dhtml.Span().Class("text-muted").Append("[" + label + "]")
+}
+
+// =================== JustifiedLR =========================
+
 // couple of <div> tags justified by applying .d-flex and .justify-content-between classes
-type JustifiedLR struct {
+type JustifiedLRElement struct {
 	l dhtml.HtmlPiece
 	r dhtml.HtmlPiece
 }
 
 // force interface implementation declaring fake variable
-var _ dhtml.ElementI = (*JustifiedLR)(nil)
+var _ dhtml.ElementI = (*JustifiedLRElement)(nil)
 
-func NewJustifiedLR() *JustifiedLR {
-	return &JustifiedLR{}
+func NewJustifiedLR() *JustifiedLRElement {
+	return &JustifiedLRElement{}
 }
 
-func (j *JustifiedLR) GetL() *dhtml.HtmlPiece {
-	return &j.l
+func (e *JustifiedLRElement) GetL() *dhtml.HtmlPiece {
+	return &e.l
 }
 
-func (j *JustifiedLR) L(v any) *JustifiedLR {
-	j.l.Append(v)
-	return j
+func (e *JustifiedLRElement) L(v any) *JustifiedLRElement {
+	e.l.Append(v)
+	return e
 }
 
-func (j *JustifiedLR) GetR() *dhtml.HtmlPiece {
-	return &j.r
+func (e *JustifiedLRElement) GetR() *dhtml.HtmlPiece {
+	return &e.r
 }
 
-func (j *JustifiedLR) R(v any) *JustifiedLR {
-	j.r.Append(v)
-	return j
+func (e *JustifiedLRElement) R(v any) *JustifiedLRElement {
+	e.r.Append(v)
+	return e
 }
 
-func (j *JustifiedLR) GetTags() dhtml.TagsList {
+func (j *JustifiedLRElement) GetTags() dhtml.TagsList {
 	return dhtml.Div().Class([]string{"d-flex", "justify-content-between"}).
 		Append(dhtml.Div().Append(j.l)).
 		Append(dhtml.Div().Append(j.r)).

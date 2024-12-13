@@ -21,40 +21,40 @@ var (
 	DefaultBtnVariantClass = BtnVariantClasses[0]
 )
 
-type Btn struct {
+type BtnElement struct {
 	tag *dhtml.Tag
 }
 
 // force interface implementation declaring fake variable
-var _ dhtml.ElementI = (*Btn)(nil)
+var _ dhtml.ElementI = (*BtnElement)(nil)
 
-func NewBtn() *Btn {
-	return &Btn{
+func NewBtn() *BtnElement {
+	return &BtnElement{
 		tag: dhtml.NewTag("a"),
 	}
 }
 
-func (e *Btn) Href(url string) *Btn {
+func (e *BtnElement) Href(url string) *BtnElement {
 	e.tag.Attribute("href", url)
 	return e
 }
 
-func (e *Btn) Label(v any) *Btn {
+func (e *BtnElement) Label(v any) *BtnElement {
 	e.tag.Append(v)
 	return e
 }
 
-func (e *Btn) Title(title string) *Btn {
+func (e *BtnElement) Title(title string) *BtnElement {
 	e.tag.Title(title)
 	return e
 }
 
-func (e *Btn) Class(v any) *Btn {
+func (e *BtnElement) Class(v any) *BtnElement {
 	e.tag.Class(v)
 	return e
 }
 
-func (e *Btn) GetTags() dhtml.TagsList {
+func (e *BtnElement) GetTags() dhtml.TagsList {
 	e.tag.GetClasses().
 		Add("btn text-nowrap").
 		AddFromSet(DefaultBtnVariantClass, BtnVariantClasses)
@@ -64,12 +64,12 @@ func (e *Btn) GetTags() dhtml.TagsList {
 
 // ======== Btn helpers ==========
 
-func NewEditBtn(href string) *Btn {
+func NewEditBtn(href string) *BtnElement {
 	return NewBtn().Href(href).Title("Edit").Class("btn-sm px-1").
 		Label(Icon("edit"))
 }
 
-func NewDeleteBtn(href, confirmMessage string) *Btn {
+func NewDeleteBtn(href, confirmMessage string) *BtnElement {
 	btn := NewBtn().Href(href).Title("Delete").Class("btn-outline-danger btn-sm px-1").
 		Label(Icon("trash"))
 
@@ -82,6 +82,52 @@ func NewDeleteBtn(href, confirmMessage string) *Btn {
 	return btn
 }
 
-func NewIconBtn(href, icon string, label any) *Btn {
+func NewIconBtn(href, icon string, label any) *BtnElement {
 	return NewBtn().Href(href).Label(Icon(icon).Label(label))
+}
+
+// =================== Buttons panel ====================
+type BtnPanelElement struct {
+	buttons []*BtnElement
+	classes dhtml.Classes
+}
+
+// force interface implementation declaring fake variable
+var _ dhtml.ElementI = (*BtnPanelElement)(nil)
+
+func NewBtnPanel() *BtnPanelElement {
+	return &BtnPanelElement{}
+}
+
+func (e *BtnPanelElement) Class(v any) *BtnPanelElement {
+	e.classes.Add(v)
+	return e
+}
+
+func (e *BtnPanelElement) AddBtn(btn *BtnElement) *BtnPanelElement {
+	e.buttons = append(e.buttons, btn)
+	return e
+}
+
+func (e *BtnPanelElement) AddIconBtn(href, icon, label string) *BtnPanelElement {
+	btn := NewBtn().Href(href).Label(Icon(icon).Label(label))
+
+	e.buttons = append(e.buttons, btn)
+	return e
+}
+
+func (e *BtnPanelElement) GetTags() dhtml.TagsList {
+	body := dhtml.NewHtmlPiece()
+
+	if len(e.buttons) == 0 {
+		body.Append(RenderEmptyValue("no buttons added"))
+	} else {
+		for _, btn := range e.buttons {
+			body.Append(btn)
+		}
+	}
+
+	rootTag := dhtml.Div().Class("border p-3").Append(body)
+
+	return rootTag.GetTags()
 }
