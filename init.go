@@ -5,9 +5,11 @@ import (
 )
 
 func init() {
-	dhtml.SetDefaultSubmitButtonClasses("btn btn-secondary")
+	settings := dhtml.Settings()
 
-	dhtml.FormManager.SetRenderErrorsF(func(fd *dhtml.FormData) (out dhtml.HtmlPiece) {
+	settings.DefaultSubmitButtonClasses = dhtml.AnyToClasses("btn btn-secondary")
+
+	settings.FormErrorsRendererF = func(fd *dhtml.FormData) (out dhtml.HtmlPiece) {
 		container := dhtml.Div().Class("border p-3 border-danger border-2 mb-3")
 
 		for name, itemErrors := range fd.GetErrors() {
@@ -35,5 +37,5 @@ func init() {
 
 		out.Append(container)
 		return out
-	})
+	}
 }
