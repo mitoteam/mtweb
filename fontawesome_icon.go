@@ -102,17 +102,17 @@ func IconNo() *IconElement {
 
 func IconYesNo(v any) *IconElement {
 	if mttools.IsEmpty(v) {
-		return IconYes()
-	} else {
 		return IconNo()
+	} else {
+		return IconYes()
 	}
 }
 
 func IconYesNoTitle(v any, yesTitle, noTitle string) *IconElement {
 	if mttools.IsEmpty(v) {
-		return IconYes().Title(yesTitle)
+		return IconNo().Title(yesTitle)
 	} else {
-		return IconNo().Title(noTitle)
+		return IconYes().Title(noTitle)
 	}
 }
 
@@ -124,7 +124,7 @@ func IconYesNoTitle(v any, yesTitle, noTitle string) *IconElement {
 // Fifth arg - title is for NO icon
 func IconYesNoLabel(v any, labels ...any) *IconElement {
 	if mttools.IsEmpty(v) {
-		icon := IconYes()
+		icon := IconNo()
 
 		if len(labels) > 0 {
 			icon.Label(labels[0])
@@ -136,7 +136,7 @@ func IconYesNoLabel(v any, labels ...any) *IconElement {
 
 		return icon
 	} else {
-		icon := IconNo()
+		icon := IconYes()
 
 		if len(labels) > 1 {
 			icon.Label(labels[1])
