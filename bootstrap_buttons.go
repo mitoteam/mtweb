@@ -127,7 +127,7 @@ func (e *BtnPanelElement) GetTags() dhtml.TagsList {
 		}
 	}
 
-	rootTag := dhtml.Div().Class("border p-3").Append(body)
+	rootTag := dhtml.Div().Class("border p-3").Class(e.classes).Append(body)
 
 	return rootTag.GetTags()
 }

@@ -5,6 +5,7 @@ import (
 	"slices"
 
 	"github.com/mitoteam/dhtml"
+	"github.com/mitoteam/mttools"
 )
 
 // Font Awesome icons helper
@@ -86,5 +87,65 @@ func (i *IconElement) GetTags() dhtml.TagsList {
 			Append(icon_tag).
 			Append(i.label).
 			GetTags()
+	}
+}
+
+// ================== Useful helpers ==========================
+
+func IconYes() *IconElement {
+	return Icon("check")
+}
+
+func IconNo() *IconElement {
+	return Icon("ban")
+}
+
+func IconYesNo(v any) *IconElement {
+	if mttools.IsEmpty(v) {
+		return IconYes()
+	} else {
+		return IconNo()
+	}
+}
+
+func IconYesNoTitle(v any, yesTitle, noTitle string) *IconElement {
+	if mttools.IsEmpty(v) {
+		return IconYes().Title(yesTitle)
+	} else {
+		return IconNo().Title(noTitle)
+	}
+}
+
+// Yes/No icon with label.
+// First arg is value itself.
+// Second arg - label is for YES value
+// Third arg - label is for NO value
+// Fourth arg - title is for YES icon
+// Fifth arg - title is for NO icon
+func IconYesNoLabel(v any, labels ...any) *IconElement {
+	if mttools.IsEmpty(v) {
+		icon := IconYes()
+
+		if len(labels) > 0 {
+			icon.Label(labels[0])
+		}
+
+		if len(labels) > 2 {
+			icon.Label(labels[2])
+		}
+
+		return icon
+	} else {
+		icon := IconNo()
+
+		if len(labels) > 1 {
+			icon.Label(labels[1])
+		}
+
+		if len(labels) > 3 {
+			icon.Label(labels[3])
+		}
+
+		return icon
 	}
 }
