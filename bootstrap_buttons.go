@@ -54,7 +54,7 @@ func (e *BtnElement) Class(v any) *BtnElement {
 	return e
 }
 
-func (e *BtnElement) GetTags() dhtml.TagsList {
+func (e *BtnElement) GetTags() dhtml.TagList {
 	e.tag.GetClasses().
 		Add("btn text-nowrap").
 		AddFromSet(DefaultBtnVariantClass, BtnVariantClasses)
@@ -116,7 +116,7 @@ func (e *BtnPanelElement) AddIconBtn(href, icon, label string) *BtnPanelElement 
 	return e
 }
 
-func (e *BtnPanelElement) GetTags() dhtml.TagsList {
+func (e *BtnPanelElement) GetTags() dhtml.TagList {
 	body := dhtml.NewHtmlPiece()
 
 	if len(e.buttons) == 0 {

@@ -38,7 +38,7 @@ func (c *CardElement) GetBody() *dhtml.HtmlPiece {
 }
 
 // region Rendering
-func (c *CardElement) GetTags() dhtml.TagsList {
+func (c *CardElement) GetTags() dhtml.TagList {
 	root := dhtml.Div().Class("card")
 
 	if !c.header.IsEmpty() {

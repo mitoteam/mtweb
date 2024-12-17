@@ -18,7 +18,7 @@ func (e *CardListElement) Add(card *CardElement) *CardListElement {
 	return e
 }
 
-func (e *CardListElement) GetTags() dhtml.TagsList {
+func (e *CardListElement) GetTags() dhtml.TagList {
 	root := dhtml.Div().Class("card-list row row-cols-md-2 g-3")
 
 	for _, card := range e.cards {

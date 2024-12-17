@@ -67,7 +67,7 @@ func (i *IconElement) ElementClass(v any) *IconElement {
 	return i
 }
 
-func (i *IconElement) GetTags() dhtml.TagsList {
+func (i *IconElement) GetTags() dhtml.TagList {
 	icon_tag := dhtml.NewTag("i").Title(i.title)
 
 	icon_tag.GetClasses().
