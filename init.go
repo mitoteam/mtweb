@@ -5,41 +5,40 @@ import (
 )
 
 func init() {
-	settings := dhtml.Settings()
+	/*
+		dhtmlformSettings := dhtmlform.Settings()
+		dhtmlformSettings.FormErrorsRendererF = func(fd *dhtml.FormData) (out dhtml.HtmlPiece) {
+			container := dhtml.Div().Class("border p-3 border-danger border-2 mb-3")
 
-	settings.DefaultSubmitButtonClasses = dhtml.NewClasses("btn btn-secondary")
+			for name, itemErrors := range fd.GetErrors() {
+				for _, itemError := range itemErrors {
+					errorDiv := dhtml.Div().Class("item-error")
 
-	settings.FormErrorsRendererF = func(fd *dhtml.FormData) (out dhtml.HtmlPiece) {
-		container := dhtml.Div().Class("border p-3 border-danger border-2 mb-3")
+					if container.HasChildren() {
+						//not first error, so add separating line
+						errorDiv.Class("border-top border-1 mt-1 pt-1")
+					}
 
-		for name, itemErrors := range fd.GetErrors() {
-			for _, itemError := range itemErrors {
-				errorDiv := dhtml.Div().Class("item-error")
+					errorDiv.Append(Icon("circle-xmark").Class("text-danger").ElementClass("me-1"))
 
-				if container.HasChildren() {
-					//not first error, so add separating line
-					errorDiv.Class("border-top border-1 mt-1 pt-1")
+					if name != "" {
+						errorDiv.Attribute("data-form-item-name", name).
+							Append(dhtml.Span().Class("fw-bold").Append(fd.GetLabel(name))).
+							Append(":")
+					}
+
+					errorDiv.Append(itemError)
+
+					container.Append(errorDiv)
 				}
-
-				errorDiv.Append(Icon("circle-xmark").Class("text-danger").ElementClass("me-1"))
-
-				if name != "" {
-					errorDiv.Attribute("data-form-item-name", name).
-						Append(dhtml.Span().Class("fw-bold").Append(fd.GetLabel(name))).
-						Append(":")
-				}
-
-				errorDiv.Append(itemError)
-
-				container.Append(errorDiv)
 			}
+
+			out.Append(container)
+			return out
 		}
+	*/
 
-		out.Append(container)
-		return out
-	}
-
-	settings.EmptyLabelRendererF = func(label string, span *dhtml.Tag) {
+	dhtml.Settings().EmptyLabelRendererF = func(label string, span *dhtml.Tag) {
 		if label == "" {
 			label = "empty"
 		}

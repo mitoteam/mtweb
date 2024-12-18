@@ -1,10 +1,6 @@
 package mtweb
 
-import (
-	"github.com/mitoteam/dhtml"
-	"github.com/mitoteam/mttools"
-)
-
+/*
 type FormFloatingInputElement struct {
 	*dhtml.FormInputElement
 }
@@ -24,3 +20,4 @@ func (e *FormFloatingInputElement) Label(v any) *FormFloatingInputElement {
 	e.FormInputElement.Label(v).Placeholder(mttools.AnyToString(v))
 	return e
 }
+*/
