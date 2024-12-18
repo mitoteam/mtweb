@@ -57,7 +57,7 @@ func (e *BtnElement) Class(v any) *BtnElement {
 func (e *BtnElement) GetTags() dhtml.TagList {
 	e.tag.GetClasses().
 		Add("btn text-nowrap").
-		AddFromSet(DefaultBtnVariantClass, BtnVariantClasses)
+		AddFromSet(BtnVariantClasses, DefaultBtnVariantClass)
 
 	return e.tag.GetTags()
 }

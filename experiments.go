@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/mitoteam/dhtml"
+	"github.com/mitoteam/dhtmlform"
 )
 
 func BuildExperimentHtml() string {
@@ -55,6 +56,28 @@ func BuildExperimentHtml() string {
 	)
 
 	return document.String()
+}
+
+var ExperimentFormHandler = dhtmlform.FormHandler{
+	RenderF: func(formBody *dhtml.HtmlPiece, fd *dhtmlform.FormData) {
+		formBody.Append("ExperimentFormHandler")
+		formBody.Append(dhtmlform.NewTextarea("area").Default("def value\nmulti").Label("Label").Note("notes for <textarea>"))
+
+		formBody.Append(
+			dhtml.Div().Append("Deeper").Class("mt-3 p-3 border").Append(
+				dhtmlform.NewTextarea("area2").Default("def2").Label("Label2").Note("note2"),
+			).Append(
+				dhtml.Div().Append("And Deeper").Class("mt-3 p-3 border").Append(
+					dhtmlform.NewTextarea("area3").Default("def3").Label("Label3").Note("note3"),
+				),
+			),
+		)
+
+		formBody.Append(dhtmlform.NewSubmitBtn())
+	},
+	ValidateF: func(fd *dhtmlform.FormData) {
+		fd.SetRebuild(true)
+	},
 }
 
 func init() {

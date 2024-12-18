@@ -72,7 +72,7 @@ func (i *IconElement) GetTags() dhtml.TagList {
 
 	icon_tag.GetClasses().
 		Add("fa-"+i.Name).
-		AddFromSet(default_fa_class, fa_icon_classes).
+		AddFromSet(fa_icon_classes, default_fa_class).
 		Add(i.iconClasses)
 
 	if i.label.IsEmpty() {
