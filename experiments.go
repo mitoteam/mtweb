@@ -1,8 +1,6 @@
 package mtweb
 
 import (
-	"time"
-
 	"github.com/mitoteam/dhtml"
 	"github.com/mitoteam/dhtmlform"
 )
@@ -62,52 +60,36 @@ var ExperimentFormHandler = dhtmlform.FormHandler{
 	RenderF: func(formBody *dhtml.HtmlPiece, fd *dhtmlform.FormData) {
 		formBody.Append("ExperimentFormHandler")
 		formBody.Append(dhtmlform.NewTextarea("area").Default("def value\nmulti").Label("Label").Note("notes for <textarea>"))
+		formBody.Append(dhtmlform.NewTextInput("txt").Default("def").Label("Label text").Note("notes for <input>"))
 
 		formBody.Append(
 			dhtml.Div().Append("Deeper").Class("mt-3 p-3 border").Append(
 				dhtmlform.NewTextarea("area2").Default("def2").Label("Label2").Note("note2"),
 			).Append(
 				dhtml.Div().Append("And Deeper").Class("mt-3 p-3 border").Append(
-					dhtmlform.NewTextarea("area3").Default("def3").Label("Label3").Note("note3"),
+					dhtmlform.NewTextarea("area3").Required(true).Label("Label3").Note("note3"),
 				),
 			),
 		)
 
+		formBody.Append(
+			dhtmlform.NewCheckbox("cb1").Default(true).Label("Checkbox 1").Note("notes for checkbox"),
+			dhtmlform.NewCheckbox("cb2").Label("Checkbox 2"),
+			dhtmlform.NewPasswordInput("pwd").Label("Password").Default("ha"),
+		)
+
 		formBody.Append(dhtmlform.NewSubmitBtn())
 	},
+
 	ValidateF: func(fd *dhtmlform.FormData) {
-		fd.SetRebuild(true)
-	},
-}
-
-func init() {
-	dhtml.FormManager.Register(&dhtml.FormHandler{
-		Id: "test_form",
-		RenderF: func(form *dhtml.FormElement, fd *dhtml.FormData) {
-			//form.Append(dhtml.Dbg("Args: %v", fd.GetAllArgs()))
-
-			form.
-				Append(
-					dhtml.NewFormInput("weha", "text").
-						Label("test label").Note("test note").DefaultValue("default v"),
-				).
-				Append(
-					dhtml.Div().Class("p-3 border").Append(
-						dhtml.NewFormInput("another", "date").
-							Label("Date").Note("Another input").DefaultValue(time.Now().Format(time.DateOnly)),
-					),
-				).
-				Append(dhtml.NewFormSubmit())
-		},
-		ValidateF: func(fd *dhtml.FormData) {
-			if v, ok := fd.GetValue("weha").(string); ok {
-				if len(v) < 3 {
-					fd.SetItemError("weha", "At least three characters expected")
-				}
+		if v, ok := fd.GetValue("area2").(string); ok {
+			if len(v) < 3 {
+				fd.SetError("area2", "At least three characters expected")
 			}
-		},
-		SubmitF: func(fd *dhtml.FormData) {
-			fd.SetRedirect("/")
-		},
-	})
+		}
+	},
+
+	SubmitF: func(fd *dhtmlform.FormData) {
+		fd.SetRedirect("/")
+	},
 }

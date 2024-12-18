@@ -7,7 +7,7 @@ import (
 func init() {
 	settings := dhtml.Settings()
 
-	settings.DefaultSubmitButtonClasses = dhtml.AnyToClasses("btn btn-secondary")
+	settings.DefaultSubmitButtonClasses = dhtml.NewClasses("btn btn-secondary")
 
 	settings.FormErrorsRendererF = func(fd *dhtml.FormData) (out dhtml.HtmlPiece) {
 		container := dhtml.Div().Class("border p-3 border-danger border-2 mb-3")
