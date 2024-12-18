@@ -67,7 +67,7 @@ var ExperimentFormHandler = dhtmlform.FormHandler{
 				dhtmlform.NewTextarea("area2").Default("def2").Label("Label2").Note("note2"),
 			).Append(
 				dhtml.Div().Append("And Deeper").Class("mt-3 p-3 border").Append(
-					dhtmlform.NewTextarea("area3").Required(true).Label("Label3").Note("note3"),
+					dhtmlform.NewTextarea("area3").Require().Label("Label3").Note("note3"),
 				),
 			),
 		)
