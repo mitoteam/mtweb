@@ -2,6 +2,7 @@ package mtweb
 
 import (
 	"github.com/mitoteam/dhtml"
+	"github.com/mitoteam/dhtmlbs"
 	"github.com/mitoteam/dhtmlform"
 )
 
@@ -46,9 +47,7 @@ func BuildExperimentHtml() string {
 	document.Body().Append(
 		NewCard().
 			Header(
-				NewJustifiedLR().
-					L("Card title text").
-					R(Icon("car").Title("car icon title")),
+				dhtmlbs.NewJustifiedLR().L("Card title text").R(Icon("car").Title("car icon title")),
 			).
 			Body("card body"),
 	)
