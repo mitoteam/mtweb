@@ -81,7 +81,7 @@ func (i *IconElement) GetTags() dhtml.TagList {
 		return icon_tag.GetTags()
 	} else {
 		//there is a label, so wrap everything in span
-		icon_tag.Class("me-1")
+		icon_tag.Class("me-2")
 
 		return dhtml.Span().Class(i.elementClasses).
 			Append(icon_tag).

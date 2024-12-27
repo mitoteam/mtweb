@@ -4,6 +4,8 @@ import (
 	"html"
 
 	"github.com/mitoteam/dhtml"
+	"github.com/mitoteam/dhtmlbs"
+	"github.com/mitoteam/dhtmlform"
 )
 
 //https://getbootstrap.com/docs/5.3/components/buttons/
@@ -84,6 +86,15 @@ func NewDeleteBtn(href, confirmMessage string) *BtnElement {
 
 func NewIconBtn(href, icon string, label any) *BtnElement {
 	return NewBtn().Href(href).Label(Icon(icon).Label(label))
+}
+
+func NewIconSubmitBtn(icon, label string) *dhtmlform.FormControlElement {
+	return dhtmlbs.NewSubmitBtn().Label(Icon(icon).Label(label))
+}
+
+func NewDefaultSubmitBtn() *dhtmlform.FormControlElement {
+	return NewIconSubmitBtn("octagon-check", "Save")
+	// return dhtmlbs.NewSubmitBtn().Label(mtweb.Icon("arrow-right-to-bracket").Label("Sign In"))
 }
 
 // =================== Buttons panel ====================
