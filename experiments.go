@@ -45,7 +45,7 @@ func BuildExperimentHtml() string {
 		)
 
 	document.Body().Append(
-		NewCard().
+		dhtmlbs.NewCard().
 			Header(
 				dhtmlbs.NewJustifiedLR().L("Card title text").R(Icon("car").Title("car icon title")),
 			).
