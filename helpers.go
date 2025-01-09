@@ -1,6 +1,10 @@
 package mtweb
 
-import "github.com/mitoteam/dhtml"
+import (
+	"time"
+
+	"github.com/mitoteam/dhtml"
+)
 
 // Count label
 func RenderCount(count int64, title string) (out dhtml.HtmlPiece) {
@@ -25,6 +29,15 @@ func RenderTableCount(table *dhtml.TableElement, title string) (out dhtml.HtmlPi
 			dhtml.Div().Class("text-end").Append(RenderCount(cnt, title)),
 		)
 	}
+
+	return out
+}
+
+// Clock icon with datetime
+func RenderTimestamp(ts time.Time) (out dhtml.HtmlPiece) {
+	out.Append(
+		Icon("clock").Label(ts.Format(time.DateTime)).ElementClass("small text-muted"),
+	)
 
 	return out
 }
