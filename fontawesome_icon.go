@@ -92,12 +92,15 @@ func (i *IconElement) GetTags() dhtml.TagList {
 
 // ================== Useful helpers ==========================
 
+const IconNameYes = "check"
+const IconNameNo = "ban"
+
 func IconYes() *IconElement {
-	return Icon("check")
+	return Icon(IconNameYes)
 }
 
 func IconNo() *IconElement {
-	return Icon("ban")
+	return Icon(IconNameNo)
 }
 
 func IconYesNo(v any) *IconElement {
