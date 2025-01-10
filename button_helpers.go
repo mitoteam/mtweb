@@ -4,6 +4,7 @@ import (
 	"github.com/mitoteam/dhtml"
 	"github.com/mitoteam/dhtmlbs"
 	"github.com/mitoteam/dhtmlform"
+	"github.com/mitoteam/mbr"
 )
 
 // ======== Btn helpers ==========
@@ -30,13 +31,24 @@ func NewIconBtn(href, icon string, label any) *dhtmlbs.BtnElement {
 	return dhtmlbs.NewBtn().Href(href).Label(Icon(icon).Label(label))
 }
 
+// small btm a-la "edit" but with custom icon
+func NewSmBtn(href, icon string) *dhtmlbs.BtnElement {
+	return dhtmlbs.NewBtn().Href(href).Class("btn-sm px-1").Label(Icon(icon))
+}
+
+// Same as NewSmBtn but with route args instead of raw href
+func NewSmBtnR(icon string, routeRef any, routeArgs ...any) *dhtmlbs.BtnElement {
+	return dhtmlbs.NewBtn().
+		Href(mbr.Url(routeRef, routeArgs...)).
+		Class("btn-sm px-1").Label(Icon(icon))
+}
+
 func NewIconSubmitBtn(icon, label string) *dhtmlform.FormControlElement {
 	return dhtmlbs.NewSubmitBtn().Label(Icon(icon).Label(label))
 }
 
 func NewDefaultSubmitBtn() *dhtmlform.FormControlElement {
 	return NewIconSubmitBtn("octagon-check", "Save")
-	// return dhtmlbs.NewSubmitBtn().Label(mtweb.Icon("arrow-right-to-bracket").Label("Sign In"))
 }
 
 // =================== Buttons panel ====================
