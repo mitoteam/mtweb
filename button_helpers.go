@@ -31,6 +31,11 @@ func NewIconBtn(href, icon string, label any) *dhtmlbs.BtnElement {
 	return dhtmlbs.NewBtn().Href(href).Label(Icon(icon).Label(label))
 }
 
+// Same as NewIconBtn but with route args instead of raw href
+func NewIconBtnR(icon string, label any, routeRef any, routeArgs ...any) *dhtmlbs.BtnElement {
+	return NewIconBtn(mbr.Url(routeRef, routeArgs...), icon, label)
+}
+
 // small btm a-la "edit" but with custom icon
 func NewSmBtn(href, icon string) *dhtmlbs.BtnElement {
 	return dhtmlbs.NewBtn().Href(href).Class("btn-sm px-1").Label(Icon(icon))
@@ -38,9 +43,7 @@ func NewSmBtn(href, icon string) *dhtmlbs.BtnElement {
 
 // Same as NewSmBtn but with route args instead of raw href
 func NewSmBtnR(icon string, routeRef any, routeArgs ...any) *dhtmlbs.BtnElement {
-	return dhtmlbs.NewBtn().
-		Href(mbr.Url(routeRef, routeArgs...)).
-		Class("btn-sm px-1").Label(Icon(icon))
+	return NewSmBtn(mbr.Url(routeRef, routeArgs...), icon)
 }
 
 func NewIconSubmitBtn(icon, label string) *dhtmlform.FormControlElement {
