@@ -45,10 +45,12 @@ type TimestampElement struct {
 // force interface implementation declaring fake variable
 var _ dhtml.ElementI = (*TimestampElement)(nil)
 
+const IconTimestamp = "clock"
+
 func NewTimestamp(ts time.Time) *TimestampElement {
 	return &TimestampElement{
 		ts:     ts,
-		icon:   "clock",
+		icon:   IconTimestamp,
 		format: time.DateTime,
 	}
 }
