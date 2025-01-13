@@ -57,13 +57,13 @@ func (i *IconElement) Label(v any) *IconElement {
 }
 
 // Classes applied to icon itself
-func (i *IconElement) Class(v any) *IconElement {
-	i.iconClasses.Add(v)
+func (i *IconElement) Class(v ...any) *IconElement {
+	i.iconClasses.Add(v...)
 	return i
 }
 
-func (i *IconElement) ElementClass(v any) *IconElement {
-	i.elementClasses.Add(v)
+func (i *IconElement) ElementClass(v ...any) *IconElement {
+	i.elementClasses.Add(v...)
 	return i
 }
 
