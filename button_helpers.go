@@ -11,12 +11,12 @@ import (
 
 func NewEditBtn(href string) *dhtmlbs.BtnElement {
 	return dhtmlbs.NewBtn().Href(href).Title("Edit").Class("btn-sm px-1").
-		Label(Icon("edit"))
+		Label(Icon(FaIconEdit))
 }
 
 func NewDeleteBtn(href, confirmMessage string) *dhtmlbs.BtnElement {
 	btn := dhtmlbs.NewBtn().Href(href).Title("Delete").Class("btn-outline-danger btn-sm px-1").
-		Label(Icon("trash"))
+		Label(Icon(FaIconDelete))
 
 	if confirmMessage == "" {
 		confirmMessage = "Are you sure?"

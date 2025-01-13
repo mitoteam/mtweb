@@ -8,6 +8,19 @@ import (
 	"github.com/mitoteam/mttools"
 )
 
+const (
+	FaIconAdd     = "plus"
+	FaIconView    = "eye"
+	FaIconEdit    = "edit"
+	FaIconDelete  = "trash"
+	FaIconCount   = "abacus"
+	FaIconDevMode = "person-digging"
+	FaIconSearch  = "magnifying-glass"
+	FaIconHome    = "home"
+	FaIconYes     = "check"
+	FaIconNo      = "ban"
+)
+
 // Font Awesome icons helper
 // https://fontawesome.com
 
@@ -30,7 +43,7 @@ func SetDefaultFAClass(class string) {
 type (
 	IconElement struct {
 		Name           string
-		title          string //always applied to icon itself
+		title          string
 		label          dhtml.HtmlPiece
 		iconClasses    dhtml.Classes
 		elementClasses dhtml.Classes
@@ -77,13 +90,13 @@ func (i *IconElement) GetTags() dhtml.TagList {
 
 	if i.label.IsEmpty() {
 		//no label given, render just icon
-		icon_tag.Class(i.elementClasses) // add container classes to icon itself
+		icon_tag.Class(i.elementClasses).Title(i.title) // add container classes and title to icon itself
 		return icon_tag.GetTags()
 	} else {
 		//there is a label, so wrap everything in span
-		icon_tag.Class("me-2")
+		icon_tag.Class("me-1")
 
-		return dhtml.Span().Class(i.elementClasses).
+		return dhtml.Span().Class(i.elementClasses).Title(i.title).
 			Append(icon_tag).
 			Append(i.label).
 			GetTags()
@@ -92,15 +105,12 @@ func (i *IconElement) GetTags() dhtml.TagList {
 
 // ================== Useful helpers ==========================
 
-const IconNameYes = "check"
-const IconNameNo = "ban"
-
 func IconYes() *IconElement {
-	return Icon(IconNameYes)
+	return Icon(FaIconYes)
 }
 
 func IconNo() *IconElement {
-	return Icon(IconNameNo)
+	return Icon(FaIconNo)
 }
 
 func IconYesNo(v any) *IconElement {
