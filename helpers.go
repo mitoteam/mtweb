@@ -17,7 +17,9 @@ func RenderCount(count int64, title string) (out dhtml.HtmlPiece) {
 
 // Bootstrap styled table
 func NewTable() *dhtml.TableElement {
-	return dhtml.NewTable().Class("table table-hover table-sm").EmptyLabel("nothing here yet")
+	return dhtml.NewTable().Class("table table-hover table-sm").
+		BodyClass("table-group-divider").
+		EmptyLabel("nothing here yet")
 }
 
 // Table count label

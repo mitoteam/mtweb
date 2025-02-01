@@ -19,6 +19,7 @@ const (
 	FaIconHome    = "home"
 	FaIconYes     = "check"
 	FaIconNo      = "ban"
+	FaIconOptions = "cog"
 )
 
 // Font Awesome icons helper
