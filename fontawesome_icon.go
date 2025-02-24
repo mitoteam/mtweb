@@ -19,6 +19,7 @@ const (
 	FaIconHome    = "home"
 	FaIconYes     = "check"
 	FaIconNo      = "ban"
+	FaIconReload  = "rotate-right"
 	FaIconOptions = "cog"
 )
 
