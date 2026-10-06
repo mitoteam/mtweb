@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/mitoteam/dhtml"
+	"github.com/mitoteam/dhtmlform"
 	"github.com/mitoteam/mbr"
 )
 
@@ -65,10 +66,12 @@ func (p *PageBuilderBase) Render() (string, error) {
 	}
 }
 
+// very root html document element, to be used for rendering page content
 func (p *PageBuilderBase) GetDocument() *dhtml.HtmlDocument {
 	return p.document
 }
 
+// Sets page's title
 func (p *PageBuilderBase) Title(title string) *PageBuilderBase {
 	p.title = title
 	return p
@@ -78,11 +81,28 @@ func (p *PageBuilderBase) GetTitle() string {
 	return p.title
 }
 
+// by Default every page builder has at least one region called "main"
 func (p *PageBuilderBase) Main(v any) *PageBuilderBase {
 	p.Regions.Add("main", v)
 	return p
 }
 
+// contents of the "main" region
 func (p *PageBuilderBase) GetMain() *dhtml.HtmlPiece {
 	return p.Regions.Get("main")
+}
+
+// Builds new dhtml.FormContext to be used with form builder
+func (p *PageBuilderBase) NewFormContext() *dhtmlform.FormContext {
+	fc := dhtmlform.NewFormContext(p.Ctx.Writer(), p.Ctx.Request())
+
+	// some useful for every form things
+	fc.SetParam("MbrContext", p.Ctx)
+
+	//default redirect from "destination" query parameter
+	if destination := p.Ctx.Request().URL.Query().Get("destination"); destination != "" {
+		fc.SetRedirect(destination)
+	}
+
+	return fc
 }
