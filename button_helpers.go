@@ -84,6 +84,10 @@ func (e *BtnPanelElement) AddIconBtn(href, icon, label string) *BtnPanelElement 
 	return e
 }
 
+func (e *BtnPanelElement) IsEmpty() bool {
+	return len(e.buttons) == 0
+}
+
 func (e *BtnPanelElement) GetTags() dhtml.TagList {
 	body := dhtml.NewHtmlPiece()
 
