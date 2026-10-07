@@ -81,7 +81,7 @@ func (p *PageBuilderBase) GetTitle() string {
 	return p.title
 }
 
-// by Default every page builder has at least one region called "main"
+// Adds piece to "main" region by Default every page builder has at least one region called "main"
 func (p *PageBuilderBase) Main(v any) *PageBuilderBase {
 	p.Regions.Add("main", v)
 	return p

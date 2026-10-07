@@ -9,6 +9,7 @@ import (
 )
 
 const (
+	FaIconList    = "list"
 	FaIconAdd     = "plus"
 	FaIconView    = "eye"
 	FaIconEdit    = "edit"
