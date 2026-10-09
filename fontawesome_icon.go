@@ -18,6 +18,7 @@ const (
 	FaIconDevMode = "person-digging"
 	FaIconSearch  = "magnifying-glass"
 	FaIconHome    = "home"
+	FaIconBack    = "arrow-left-from-arc"
 	FaIconYes     = "check"
 	FaIconNo      = "ban"
 	FaIconReload  = "rotate-right"
