@@ -22,6 +22,7 @@ const (
 	FaIconYes     = "check"
 	FaIconNo      = "ban"
 	FaIconReload  = "rotate-right"
+	FaIconUpdate  = "rotate"
 	FaIconOptions = "cog"
 )
 
