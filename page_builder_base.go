@@ -37,7 +37,7 @@ func NewPageBuilderBase(ctx *mbr.MbrContext) PageBuilderBase {
 	//default page settings and assets
 	p.document.
 		Charset("utf-8").
-		Stylesheet("/assets/mtweb/vendor/bootstrap.min.css").
+		Stylesheet("/assets/mtweb/vendor/bootstrap/dist/css/bootstrap.min.css").
 		Stylesheet("/assets/mtweb/vendor/fontawesome.min.css").
 		Stylesheet("/assets/mtweb/vendor/regular.min.css")
 
@@ -55,7 +55,7 @@ func (p *PageBuilderBase) Render() (string, error) {
 	} else {
 		//JS scripts from mtweb assets
 		p.document.Body().
-			Append(dhtml.NewTag("script").Attribute("src", "/assets/mtweb/vendor/bootstrap.bundle.min.js"))
+			Append(dhtml.NewTag("script").Attribute("src", "/assets/mtweb/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"))
 
 		// render page content
 		if err := p.RenderF(); err != nil {
