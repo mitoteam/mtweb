@@ -24,6 +24,9 @@ const (
 	FaIconReload  = "rotate-right"
 	FaIconUpdate  = "rotate"
 	FaIconOptions = "cog"
+	FaIconInfo    = "circle-info"
+	FaIconWarning = "triangle-exclamation"
+	FaIconError   = "square-xmark"
 )
 
 // Font Awesome icons helper
