@@ -1,0 +1,8 @@
+@use 'bootstrap';
+@forward 'bootstrap';
+
+.small-muted
+{
+  @extend small;
+  @extend .text-muted;
+}

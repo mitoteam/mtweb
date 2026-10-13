@@ -37,7 +37,6 @@ func NewPageBuilderBase(ctx *mbr.MbrContext) PageBuilderBase {
 	//default page settings and assets
 	p.document.
 		Charset("utf-8").
-		Stylesheet("/assets/mtweb/vendor/bootstrap/dist/css/bootstrap.min.css").
 		Stylesheet("/assets/mtweb/vendor/fontawesome.min.css").
 		Stylesheet("/assets/mtweb/vendor/regular.min.css")
 
@@ -54,8 +53,7 @@ func (p *PageBuilderBase) Render() (string, error) {
 		return "", fmt.Errorf("PageBuilderBase.RenderF is not set")
 	} else {
 		//JS scripts from mtweb assets
-		p.document.Body().
-			Append(dhtml.NewTag("script").Attribute("src", "/assets/mtweb/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"))
+		p.document.Script("/assets/mtweb/vendor/bootstrap/dist/js/bootstrap.bundle.min.js")
 
 		// render page content
 		if err := p.RenderF(); err != nil {
@@ -64,6 +62,14 @@ func (p *PageBuilderBase) Render() (string, error) {
 
 		return dhtml.Piece(p.document).String(), nil
 	}
+}
+
+// Adds minified dist version of Bootstrap CSS (for when not using sass to include styles)
+func (p *PageBuilderBase) BootstrapDistCss() *PageBuilderBase {
+	p.document.
+		Stylesheet("/assets/mtweb/vendor/bootstrap/dist/css/bootstrap.min.css")
+
+	return p
 }
 
 // very root html document element, to be used for rendering page content
