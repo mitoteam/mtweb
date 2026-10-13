@@ -7,9 +7,9 @@ import (
 	"github.com/mitoteam/mbr"
 )
 
-// embedded web assets
+// Embedded web assets
 //
-//go:embed assets/vendor/bootstrap/dist/css/*.css assets/vendor/bootstrap/dist/js/*.js
+//go:embed assets/vendor/bootstrap/dist/css/*.css assets/vendor/bootstrap/dist/js/*.min.js
 //go:embed assets/vendor/*.css
 //go:embed assets/webfonts/*
 var embedFS embed.FS
