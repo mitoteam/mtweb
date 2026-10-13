@@ -64,14 +64,6 @@ func (p *PageBuilderBase) Render() (string, error) {
 	}
 }
 
-// Adds minified dist version of Bootstrap CSS (for when not using sass to include styles)
-func (p *PageBuilderBase) BootstrapDistCss() *PageBuilderBase {
-	p.document.
-		Stylesheet("/assets/mtweb/vendor/bootstrap/dist/css/bootstrap.min.css")
-
-	return p
-}
-
 // very root html document element, to be used for rendering page content
 func (p *PageBuilderBase) GetDocument() *dhtml.HtmlDocument {
 	return p.document
